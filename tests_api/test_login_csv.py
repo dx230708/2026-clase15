@@ -8,6 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RUTA_CSV = os.path.join(BASE_DIR, "datos", "login.csv")
 RUTA_JSON = os.path.join(BASE_DIR, "datos", "productos.json")
 
+@pytest.mark.web
 # Inyección directa de la lista de tuplas generada por tu función helper
 @pytest.mark.parametrize("usuario, clave, debe_funcionar, descripcion", leer_csv_login(RUTA_CSV))
 def test_login_data_driven(driver, usuario, clave, debe_funcionar, descripcion):

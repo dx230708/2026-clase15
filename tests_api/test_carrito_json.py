@@ -7,6 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RUTA_JSON = os.path.join(BASE_DIR, "datos", "productos.json")
 PRODUCTOS = leer_json_productos(RUTA_JSON)
 
+@pytest.mark.web
 @pytest.mark.parametrize("producto", PRODUCTOS)
 def test_agregar_producto_desde_json(usuario_logueado, producto):
     """
