@@ -110,14 +110,14 @@ def usuario_logueado(driver):
 # -------------------------------------------------------------------------
 def pytest_html_report_title(report):
     """Configura el título del reporte HTML de forma dinámica."""
-    report.title = "Reporte de Ejecución MVP - Clase 13"
+    report.title = "Reporte de Ejecución Clase 14-BDD"
 
 @pytest.hookimpl(tryfirst=True)
 def pytest_metadata(metadata):
     """Modifica la tabla de metadata del reporte para remover ruido y sumar tus datos."""
     # Sumamos tus datos corporativos
     metadata["Autor"] = "QA Lead Dani"
-    metadata["Proyecto"] = "Demo Validación SauceDemo & JSONPlaceholder"
+    metadata["Proyecto"] = "Demo ver login y añadir al carrito escritos en Gherkin"
     metadata["Ambiente"] = "QA / Laboratorio"
     
     # Opcional: Remover datos del entorno local que no quieras exponer al cliente
