@@ -11,3 +11,12 @@ FALLO_*.png
 # Entornos virtuales si usás uno local
 .venv/
 venv/
+
+# Ignorar reportes locales pero mantener carpetas
+reports/*
+logs/*
+!reports/.gitkeep
+!logs/.gitkeep
+.pytest_cache/
+__pycache__/
+*.pyc

@@ -1,6 +1,7 @@
 import os
 import pytest
 from utils.datos import leer_json_productos
+from pages.inventory_page import InventoryPage
 
 # Carga de la lista de diccionarios desde productos.json
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -14,7 +15,11 @@ def test_agregar_producto_desde_json(usuario_logueado, producto):
     Test que agrega cada producto del JSON al carrito de manera individual.
     Comprueba la persistencia del contador (badge) con diferentes elementos.
     """
-    driver, inventory = usuario_logueado
+    # 1. Asignamos el driver recibido directamente desde el fixture
+    driver = usuario_logueado 
+    
+    # 2. Instanciamos el Page Object pasándole el driver real
+    inventory = InventoryPage(driver)
     
     nombre = producto["nombre"]
     xpath = producto["xpath_add_button"]
