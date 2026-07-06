@@ -27,17 +27,32 @@ logger = logging.getLogger(__name__)
 @pytest.fixture(scope="function")
 def driver(request):
     logger.info(f"Iniciando WebDriver para el test: {request.node.name}")
-    
-    # Configuración limpia de Chrome
+
     options = webdriver.ChromeOptions()
-    options.add_argument("--start-maximized")
-    # options.add_argument("--headless") # Descomentar para GitHub Actions
     
+    # 🚀 DETECCIÓN AUTOMÁTICA DE CI (GitHub Actions)
+    if os.environ.get("CI") == "true":
+        logger.info("Entorno CI detectado. Forzando modo Headless para Linux.")
+        options.add_argument("--headless=new") # Ejecución en segundo plano sin pantalla
+        options.add_argument("--no-sandbox")   # Requerido para entornos de contenedores/Linux
+        options.add_argument("--disable-dev-shm-usage") # Evita problemas de memoria compartida en Docker/VMs
+    else:
+        logger.info("Entorno Local detectado. Levantando navegador con interfaz gráfica.")
+        options.add_argument("--start-maximized")
+
+    # Filtro para evitar el pop-up gris de las contraseñas que vimos en el laboratorio
+    prefs = {
+        "profile.password_manager_leak_detection": False,
+        "credentials_enable_service": False,
+        "profile.password_manager_enabled": False
+    }
+    options.add_experimental_option("prefs", prefs)
+
+    # Inicialización segura
     driver = webdriver.Chrome(options=options)
+    driver.implicitly_wait(5)
     
-    # Adjuntamos el driver al nodo del test para que el hook de reporte pueda acceder a él si falla
     request.node._driver = driver
-    
     yield driver
     
     logger.info(f"Cerrando WebDriver para el test: {request.node.name}")

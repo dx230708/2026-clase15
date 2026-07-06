@@ -6,14 +6,17 @@ from selenium import webdriver
 logger = logging.getLogger(__name__)
 
 def before_scenario(context, scenario):
-    """Configura un WebDriver limpio antes de CADA escenario, sin alertas de seguridad."""
     logger.info(f"--- INICIANDO ESCENARIO BDD: {scenario.name} ---")
-    
     options = webdriver.ChromeOptions()
-    options.add_argument("--start-maximized")
-    # options.add_argument("--headless") # Descomentar para CI/CD si corre en GitHub Actions
     
-    # 🚀 CONFIGURACIÓN CLAVE: Desactiva el pop-up de contraseñas vulneradas (Brecha de seguridad)
+    # Mismo control dinámico para Behave
+    if os.environ.get("CI") == "true":
+        options.add_argument("--headless=new")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+    else:
+        options.add_argument("--start-maximized")
+        
     prefs = {
         "profile.password_manager_leak_detection": False,
         "credentials_enable_service": False,
