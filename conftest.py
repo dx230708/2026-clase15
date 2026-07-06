@@ -118,7 +118,7 @@ def usuario_logueado(driver):
     driver.find_element("id", "login-button").click()
     
     from pages.inventory_page import InventoryPage
-    inventory_page = InventoryPage(driver)
+		inventory_page = InventoryPage(driver)
 	
     logger.info("Sesión iniciada con éxito. Cediendo el control al test.")
     yield driver, inventory_page
