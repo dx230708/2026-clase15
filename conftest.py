@@ -117,8 +117,11 @@ def usuario_logueado(driver):
     driver.find_element("id", "password").send_keys("secret_sauce")
     driver.find_element("id", "login-button").click()
     
+	from pages.inventory_page import InventoryPage
+    inventory_page = InventoryPage(driver)
+	
     logger.info("Sesión iniciada con éxito. Cediendo el control al test.")
-    yield driver
+    yield driver, inventory_page
 
 # -------------------------------------------------------------------------
 # PERSONALIZACIÓN DE METADATA Y TÍTULO DEL REPORTE HTML
