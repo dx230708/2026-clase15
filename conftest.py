@@ -116,8 +116,8 @@ def usuario_logueado(driver):
     driver.find_element("id", "user-name").send_with_delay("standard_user") if hasattr(driver.find_element("id", "user-name"), "send_with_delay") else driver.find_element("id", "user-name").send_keys("standard_user")
     driver.find_element("id", "password").send_keys("secret_sauce")
     driver.find_element("id", "login-button").click()
-    
-    from pages.inventory_page import InventoryPage
+	
+from pages.inventory_page import InventoryPage
 		inventory_page = InventoryPage(driver)
 	
     logger.info("Sesión iniciada con éxito. Cediendo el control al test.")
