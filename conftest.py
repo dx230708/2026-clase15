@@ -108,7 +108,7 @@ def usuario_logueado(driver):
     para los tests que requieren el carrito de compras.
     """
     logger.info("Ejecutando fixture 'usuario_logueado': Iniciando sesi¨®n en SauceDemo")
-    
+
     # Navegamos a la p¨¢gina
     driver.get("https://www.saucedemo.com/")
     
