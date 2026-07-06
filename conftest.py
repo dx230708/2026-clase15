@@ -103,7 +103,7 @@ def pytest_runtest_makereport(item, call):
 # -------------------------------------------------------------------------
 @pytest.fixture(scope="function")
 def usuario_logueado(driver):
-"""
+	"""
     Fixture que automatiza el inicio de sesión previo en SauceDemo
     para los tests que requieren el carrito de compras.
     """
