@@ -104,15 +104,16 @@ def pytest_runtest_makereport(item, call):
 @pytest.fixture(scope="function")
 def usuario_logueado(driver):
     """
-    Fixture que automatiza el inicio de sesi¨®n previo en SauceDemo
+    Fixture que automatiza el inicio de sesiï¿½ï¿½n previo en SauceDemo
     para los tests que requieren el carrito de compras.
     """
-    logger.info("Ejecutando fixture 'usuario_logueado': Iniciando sesi¨®n en SauceDemo")
+	
+    logger.info("Ejecutando fixture 'usuario_logueado': Iniciando sesiï¿½ï¿½n en SauceDemo")
 
-    # Navegamos a la p¨¢gina
+    # Navegamos a la pï¿½ï¿½gina
     driver.get("https://www.saucedemo.com/")
     
-    # Metemos las credenciales est¨¢ndar
+    # Metemos las credenciales estï¿½ï¿½ndar
     username_field = driver.find_element("id", "user-name")
     if hasattr(username_field, "send_with_delay"):
         username_field.send_with_delay("standard_user")
@@ -122,11 +123,11 @@ def usuario_logueado(driver):
     driver.find_element("id", "password").send_keys("secret_sauce")
     driver.find_element("id", "login-button").click()
 
-    # Importaci¨®n e instanciaci¨®n alineadas
+    # Importaciï¿½ï¿½n e instanciaciï¿½ï¿½n alineadas
     from pages.inventory_page import InventoryPage
     inventory_page = InventoryPage(driver)
     
-    logger.info("Sesi¨®n iniciada con ¨¦xito. Cediendo el control al test.")
+    logger.info("Sesiï¿½ï¿½n iniciada con ï¿½ï¿½xito. Cediendo el control al test.")
     yield driver, inventory_page
 
 # -------------------------------------------------------------------------
